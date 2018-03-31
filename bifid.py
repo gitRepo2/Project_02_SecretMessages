@@ -6,11 +6,11 @@ class Bifid(Cipher):
     def __init__(self):
         self.key_needed_to_encrypt = False
         self.key_needed_to_decrypt = False
-        self.abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+        self.abc = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
         abc_index = 0
         self.tableau = {}
-        for x in range(0, 6):
-            for y in range(0, 6):
+        for x in range(0, 5):
+            for y in range(0, 5):
                 self.tableau.update({self.abc[abc_index]: (x, y)})
                 abc_index += 1
         self.inv_tableau = {v: k for k, v in self.tableau.items()}
@@ -20,6 +20,7 @@ class Bifid(Cipher):
         cipher encrypted string back. The encrypted text is return in blocks
         of 5 characters characters divided by a space.E.g. 'CDXSA FHXMU'. '''
         text = text.upper().replace(' ', '')
+        text = text.replace('J', 'I')
         output = []
         coordinates_begin = []
         coordinates_end = []

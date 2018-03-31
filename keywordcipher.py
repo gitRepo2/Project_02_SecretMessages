@@ -7,7 +7,7 @@ class KeywordCipher(Cipher):
     def __init__(self):
         self.key_needed_to_encrypt = True
         self.key_needed_to_decrypt = True
-        self.abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        self.abc = 'ABCDEFGHIKLMNOPQRSTUVWXYZ-'
 
     def encrypt(self, text, keyword):
         '''This method takes a text and a keyword as an input argument
@@ -16,7 +16,9 @@ class KeywordCipher(Cipher):
         letters . E.g. 'ENCRY PTEDT EXT'.'''
         output = []
         text = text.upper().replace(' ', '')
+        text = text.replace('J', 'I')
         keyword = keyword.upper()
+        keyword = keyword.replace('J', 'I')
 
         encoded_abc = list(self.abc)
         for index in range(len(keyword)):
@@ -36,7 +38,8 @@ class KeywordCipher(Cipher):
         letters. E.g. 'DECRY PTEDT EXT'.'''
         output = []
         text = text.upper().replace(' ', '')
-        keyword = keyword.upper()
+        keyword = keyword.upper().replace(' ', '')
+        keyword = keyword.replace('J', 'I')
 
         encoded_abc = list(self.abc)
         for index in range(len(keyword)):
@@ -50,16 +53,16 @@ class KeywordCipher(Cipher):
 
 '''
 kc = KeywordCipher()
-# print('encrypted: ', hi.encrypt('KNOWLEDGE IS POWER))
-# print('decrypted: ', hi.decrypt('FNWFNWKCGFXPLLUL'))
-text = 'KNOWLEDGEISPOWER'
-key = 'kryptos'
-if text == kc.decrypt(kc.encrypt(text, key), key):
+# print('encrypted: ', kc.encrypt('KNOWLEDGE IS POWER))
+# print('decrypted: ', kc.decrypt('FNWFNWKCGFXPLLUL'))
+text = 'KNOWLEDGEIJSPOWER'
+key = 'krytos'
+if text == kc.decrypt(kc.encrypt(text, key)[0], key):
     print('The en- and decryption worked')
 else:
     print('The en- and decryption did NOT work')
 print(kc.encrypt(text, key))
-print(kc.decrypt(kc.encrypt(text, key), key))
+print(kc.decrypt(kc.encrypt(text, key)[0], key))
 '''
 checker = pep8.Checker('keywordcipher.py')
 checker.check_all()

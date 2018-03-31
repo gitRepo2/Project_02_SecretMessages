@@ -20,21 +20,23 @@ class Cipher:
         '''This method takes a text, an encrpyted text and if available
         a key. It returns the information in a ready to print format.'''
         encrypted_text = self.create_blocks(encrypted_text)
-        output = output = "Text input: {}\nEncrypted text: {}\n".format(
+        printable_output = "Input message: {}\nEncrypted message: {}\n".format(
                 text, encrypted_text)
         if key:
             key = self.create_blocks(key)
-            output = "Text input: {}\nEncrypted text: {}\nKey: {}".format(
-                text, encrypted_text, key)
-        return output
+            printable_output = '''Input: {}\nEncrypted: {}
+Used {} cipher key: {}'''.format(
+                text, encrypted_text, self.__class__.__name__, key)
+        return encrypted_text, printable_output
 
     def decrypt_format_output(self, text, decrypted_text):
         '''This method takes a text, an decrpyted text. It returns the
         information in a ready to print format.'''
         decrypted_text = self.create_blocks(decrypted_text)
-        output = "Encrypted text input: {}\nDecrypted text: {}\n".format(
+        printable_output = '''Encrypted message input: {}
+Decrypted message: {}\n'''.format(
                 text, decrypted_text)
-        return output
+        return decrypted_text, printable_output
 
 
 checker = pep8.Checker('ciphers.py')

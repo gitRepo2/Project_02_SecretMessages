@@ -1,0 +1,8 @@
+### Dependencies - Secret Messages ###
+
+# use:
+# pip install -r requirements.txt
+# to get your environment ready for the Secret Messages program
+
+numpy==1.12.1
+pep8==1.7.1
